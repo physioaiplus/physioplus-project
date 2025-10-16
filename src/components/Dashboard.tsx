@@ -33,6 +33,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
   onPatientSelect,
   onViewChange
 }) => {
+  // Prevent unused prop TypeScript warning (kept for future use)
+  void onViewChange;
   const [query, setQuery] = useState('');
   const [gender, setGender] = useState<'all' | 'M' | 'F'>('all');
   const [onlyDiagnosis, setOnlyDiagnosis] = useState(false);
