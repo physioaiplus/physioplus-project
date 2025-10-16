@@ -1,14 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import { Plus, Search } from 'lucide-react';
 import { PatientCard } from './PatientCard';
-import type { Patient, ViewType } from '../types';
+import type { Patient } from '../types';
 
 interface DashboardProps {
   patients: Patient[];
   isLoading: boolean;
   onAddPatient: () => void;
   onPatientSelect: (patient: Patient) => void;
-  onViewChange: (view: ViewType) => void;
 }
 
 function timeAgo(iso: string): string {
@@ -30,8 +29,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   patients,
   isLoading,
   onAddPatient,
-  onPatientSelect,
-  onViewChange
+  onPatientSelect
 }) => {
   const [query, setQuery] = useState('');
   const [gender, setGender] = useState<'all' | 'M' | 'F'>('all');
