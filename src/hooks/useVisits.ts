@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { API_URL } from '../constants';
 import type { Visit, AnalysisType } from '../types';
 import { createVisitFs, getVisitByIdFs, listRecentVisitsByPatient } from '../services/visits.firestore';
 

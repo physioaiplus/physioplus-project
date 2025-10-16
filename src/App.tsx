@@ -38,7 +38,6 @@ export default function App() {
   
   const { 
     currentVisit, 
-    isLoading: visitLoading, 
     createVisit 
   } = useVisits();
   
@@ -167,7 +166,6 @@ export default function App() {
             isLoading={patientsLoading}
             onAddPatient={() => setCurrentView(ViewType.NEW_PATIENT)}
             onPatientSelect={handlePatientSelect}
-            onViewChange={handleViewChange}
           />
         );
 
@@ -228,7 +226,6 @@ export default function App() {
             isLoading={patientsLoading}
             onAddPatient={() => setCurrentView(ViewType.NEW_PATIENT )}
             onPatientSelect={handlePatientSelect}
-            onViewChange={handleViewChange}
           />
         );
     }

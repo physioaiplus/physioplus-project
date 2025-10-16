@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, Activity, Eye, Settings, History, Camera, LogOut } from 'lucide-react';
+import { Users, Settings, History, Camera, LogOut } from 'lucide-react';
 import { ViewType } from '../../types';
 
 interface NavHeaderProps {
