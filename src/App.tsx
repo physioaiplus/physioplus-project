@@ -38,7 +38,6 @@ export default function App() {
   
   const { 
     currentVisit, 
-    isLoading: visitLoading, 
     createVisit 
   } = useVisits();
   
