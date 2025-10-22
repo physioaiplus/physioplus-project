@@ -7,17 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
+        // Palette ispirata al logo HUMOTION
+        brand: {
+          blue: '#1D4ED8',    // blu profondo
+          light: '#60A5FA',   // azzurro del gradiente
+          cyan: '#67E8F9',    // accento chiaro
+          dark: '#111827',    // quasi-nero per testi
+          gray: '#6B7280',    // grigio sottotitoli
+          white: '#FFFFFF'
         }
       },
       animation: {

@@ -13,7 +13,7 @@ export const Header: React.FC<HeaderProps> = ({ title, onBack, children }) => {
         {onBack && (
           <button
             onClick={onBack}
-            className="text-indigo-600 hover:text-indigo-700 mb-2"
+            className="text-brand-blue hover:text-brand-blue/80 mb-2"
           >
             ← Indietro
           </button>
@@ -26,8 +26,3 @@ export const Header: React.FC<HeaderProps> = ({ title, onBack, children }) => {
     </header>
   );
 };
-
-
-
-
-

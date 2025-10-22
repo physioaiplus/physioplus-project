@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { Activity } from 'lucide-react';
 import type { Patient, Visit } from '../types';
 import { Header } from './header/Header';
@@ -14,7 +14,7 @@ const ANALYSIS_TYPES = [
   {
     id: 'completa',
     title: 'Analisi Completa',
-    description: 'Postura + mobilità + peso + appoggi',
+    description: 'Postura + mobilitÃ  + peso + appoggi',
     icon: Activity
   },
   {
@@ -25,13 +25,13 @@ const ANALYSIS_TYPES = [
   },
   {
     id: 'mobilita_superiori',
-    title: 'Mobilità Arti Superiori',
+    title: 'MobilitÃ  Arti Superiori',
     description: 'Spalla, braccio - frontale e laterale',
     icon: Activity
   },
   {
     id: 'mobilita_inferiori',
-    title: 'Mobilità Arti Inferiori',
+    title: 'MobilitÃ  Arti Inferiori',
     description: 'Ginocchio, anca - frontale e laterale',
     icon: Activity
   }
@@ -102,9 +102,9 @@ export const PatientDetail: React.FC<PatientDetailProps> = ({
               <button
                 key={id}
                 onClick={() => onCreateVisit(id)}
-                className="p-6 border-2 border-gray-300 rounded-md hover:border-indigo-600 hover:bg-indigo-50 transition-all text-left"
+                className="p-6 border-2 border-gray-300 rounded-md hover:border-brand-blue hover:bg-brand-light\/20 transition-all text-left"
               >
-                <Icon className="w-8 h-8 text-indigo-600 mb-2" />
+                <Icon className="w-8 h-8 text-brand-blue mb-2" />
                 <h3 className="font-semibold text-lg mb-2">{title}</h3>
                 <p className="text-sm text-gray-600">{description}</p>
               </button>

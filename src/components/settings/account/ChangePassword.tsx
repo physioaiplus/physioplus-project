@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { auth } from '../../../config/firebase';
 import { updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
 
@@ -50,7 +50,7 @@ export const ChangePassword: React.FC = () => {
         </div>
       </div>
       <div className="mt-4">
-        <button disabled={saving} onClick={handleChange} className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 disabled:opacity-50">
+        <button disabled={saving} onClick={handleChange} className="px-4 py-2 bg-brand-blue text-white rounded hover:opacity-90 disabled:opacity-50">
           {saving ? 'Aggiornamento...' : 'Aggiorna password'}
         </button>
       </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import type { Patient } from '../types';
 
 interface PatientCardProps {
@@ -16,8 +16,8 @@ export const PatientCard: React.FC<PatientCardProps> = ({ patient, onClick }) =>
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
-            <span className="text-lg font-semibold text-indigo-600">
+          <div className="w-12 h-12 bg-brand-light/20 rounded-full flex items-center justify-center">
+            <span className="text-lg font-semibold text-brand-blue">
               {initials}
             </span>
           </div>

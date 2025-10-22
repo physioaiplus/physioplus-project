@@ -4,7 +4,7 @@
 export const API_URL = 'http://localhost:8000';
 export const WS_URL = 'ws://localhost:8000';
 
-export const APP_NAME = 'Human+™';
+export const APP_NAME = 'Humotion';
 export const APP_DESCRIPTION = 'Sistema Rilevamento Posturale';
 
 // Routes

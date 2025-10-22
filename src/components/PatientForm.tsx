@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import type { NewPatientFormData } from '../types';
 import { Header } from './header/Header';
 
@@ -59,7 +59,7 @@ export const PatientForm: React.FC<PatientFormProps> = ({
                   type="text"
                   value={formData.nome}
                   onChange={handleInputChange('nome')}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-blue"
                   required
                   disabled={isLoading}
                 />
@@ -72,7 +72,7 @@ export const PatientForm: React.FC<PatientFormProps> = ({
                   type="text"
                   value={formData.cognome}
                   onChange={handleInputChange('cognome')}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-blue"
                   required
                   disabled={isLoading}
                 />
@@ -87,7 +87,7 @@ export const PatientForm: React.FC<PatientFormProps> = ({
                 type="email"
                 value={formData.email}
                 onChange={handleInputChange('email')}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-blue"
                 required
                 disabled={isLoading}
               />
@@ -102,7 +102,7 @@ export const PatientForm: React.FC<PatientFormProps> = ({
                   type="number"
                   value={formData.altezza}
                   onChange={handleInputChange('altezza')}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-blue"
                   required
                   disabled={isLoading}
                 />
@@ -115,7 +115,7 @@ export const PatientForm: React.FC<PatientFormProps> = ({
                   type="number"
                   value={formData.peso}
                   onChange={handleInputChange('peso')}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-blue"
                   required
                   disabled={isLoading}
                 />
@@ -127,7 +127,7 @@ export const PatientForm: React.FC<PatientFormProps> = ({
                 <select
                   value={formData.sesso}
                   onChange={handleInputChange('sesso')}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-blue"
                   disabled={isLoading}
                 >
                   <option value="M">Maschio</option>
@@ -144,7 +144,7 @@ export const PatientForm: React.FC<PatientFormProps> = ({
                 type="text"
                 value={formData.patologia}
                 onChange={handleInputChange('patologia')}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-blue"
                 placeholder="Opzionale"
                 disabled={isLoading}
               />
@@ -157,7 +157,7 @@ export const PatientForm: React.FC<PatientFormProps> = ({
               <textarea
                 value={formData.obiettivo}
                 onChange={handleInputChange('obiettivo')}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-blue"
                 rows={3}
                 placeholder="Obiettivo della terapia"
                 disabled={isLoading}
@@ -189,7 +189,7 @@ export const PatientForm: React.FC<PatientFormProps> = ({
               </button>
               <button
                 type="submit"
-                className="flex-1 px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors disabled:opacity-50"
+                className="flex-1 px-6 py-3 bg-brand-blue text-white rounded-md hover:opacity-90 transition-colors disabled:opacity-50"
                 disabled={isLoading || !formData.privacy_accepted}
               >
                 {isLoading ? 'Creazione...' : 'Crea Paziente'}

@@ -63,7 +63,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           <h2 className="text-2xl font-bold text-gray-900">Pazienti</h2>
           <button
             onClick={onAddPatient}
-            className="flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors"
+            className="flex items-center space-x-2 bg-[#007BFF] text-white px-4 py-2 rounded-md hover:opacity-90 transition-opacity"
           >
             <Plus className="w-5 h-5" />
             <span>Nuovo Paziente</span>
@@ -79,7 +79,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Cerca per nome o email"
-                className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
+                className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-blue"
               />
             </div>
             <select
@@ -110,7 +110,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
               {recentPatients.map((p) => (
                 <div key={p.id} className="bg-white rounded-md border p-4 flex items-center justify-between hover:shadow cursor-pointer" onClick={() => onPatientSelect(p)}>
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-semibold">
+                    <div className="w-10 h-10 bg-brand-light/20 rounded-full flex items-center justify-center text-brand-blue font-semibold">
                       {p.nome.charAt(0)}{p.cognome.charAt(0)}
                     </div>
                     <div>
@@ -126,7 +126,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
         {isLoading ? (
           <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-blue"></div>
             <span className="ml-2 text-gray-600">Caricamento pazienti...</span>
           </div>
         ) : (
