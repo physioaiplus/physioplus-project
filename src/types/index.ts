@@ -74,7 +74,8 @@ export enum ViewType {
   PATIENT_DETAIL = 'patientDetail',
   EXERCISE = 'exercise',
   HISTORY = 'history',
-  SETTINGS = 'settings'
+  SETTINGS = 'settings',
+  CONTACT = 'contact'
 }
 
 // Form data
@@ -93,6 +94,8 @@ export interface NewPatientFormData {
   patologia: string;
   obiettivo: string;
   privacy_accepted: boolean;
+  // PNG data URL della firma digitale (opzionale in fase di salvataggio)
+  signature_data?: string;
 }
 
 // API Response types

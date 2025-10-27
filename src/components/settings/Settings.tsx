@@ -46,7 +46,7 @@ export const Settings: React.FC<{ onBack?: () => void }>= ({ onBack }) => {
           <LanguageView />
         )}
         {['privacy','policy','help','contact','about','updates'].includes(view) && (
-          <div className="bg-white rounded-md shadow p-8 text-gray-700">
+          <div className="card-outset p-8 text-gray-700">
             Sezione in arrivo.
           </div>
         )}

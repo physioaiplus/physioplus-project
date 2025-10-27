@@ -11,7 +11,7 @@ export const PatientCard: React.FC<PatientCardProps> = ({ patient, onClick }) =>
 
   return (
     <div
-      className="bg-white rounded-md shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer"
+      className="card-outset p-6 hover:shadow-lg transition-shadow cursor-pointer"
       onClick={() => onClick(patient)}
     >
       <div className="flex items-center justify-between mb-4">

@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import { Globe } from 'lucide-react';
 import type { LoginFormData } from '../types';
-import { APP_NAME, APP_DESCRIPTION } from '../constants';
+import { APP_DESCRIPTION } from '../constants';
 
 interface LoginScreenProps {
   onLogin: (formData: LoginFormData) => Promise<void>;
   isLoading: boolean;
   authError?: string | null;
   onClearError?: () => void;
+  onOpenContact?: () => void;
 }
 
-export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, isLoading, authError, onClearError }) => {
+export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, isLoading, authError, onClearError, onOpenContact }) => {
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
     password: ''
   });
+  const [logoFailed, setLogoFailed] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,42 +36,25 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, isLoading, au
 
   return (
     <div className="min-h-screen bg-sky-100 bg-[url('/assets/humotion-bg.svg')] bg-cover bg-center">
-      {/* Top rounded navbar similar to screenshot */}
-      <div className="mx-4 pt-4">
-        <div className="backdrop-blur-sm bg-white/95 border border-gray-200 rounded-3xl shadow-sm">
-          <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img src="/assets/humotion-logo-full.svg" alt="Humotion" className="h-7 sm:h-8" />
-            </div>
-            <div className="hidden md:flex items-center gap-8 text-gray-700">
-              <a className="text-sm font-medium hover:text-gray-900" href="#features">Prodotto</a>
-              <a className="text-sm font-medium hover:text-gray-900" href="#docs">Risorse</a>
-              <a className="text-sm font-medium hover:text-gray-900" href="#pricing">Prezzi</a>
-              <a className="text-sm font-medium hover:text-gray-900" href="#enterprise">Enterprise</a>
-            </div>
-            <div className="flex items-center gap-3">
-              <Globe className="w-5 h-5 text-gray-600" />
-              <a href="#accesso" className="inline-flex items-center rounded-full px-4 py-2 bg-gradient-to-r from-brand-cyan to-brand-blue text-white font-medium hover:opacity-90 transition-opacity">Inizia</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Hero section */}
-      <div className="max-w-5xl mx-auto text-center px-6 pt-20">
-        <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight text-gray-900">
-          Dai forma alle tue valutazioni
-          <br className="hidden md:block" />
-          posturali nel tuo modo
-        </h1>
-        <p className="mt-8 text-lg md:text-xl text-gray-700">
-          {APP_NAME} ti aiuta a creare sessioni e analisi complete in pochi minuti,
-          con strumenti semplici e flessibili.
+      {/* Brand hero with logo */}
+      <div className="max-w-[960px] mx-auto px-6 pt-10 md:pt-12 mb-2 md:mb-4 text-center flex flex-col items-center">
+        {!logoFailed ? (
+          <img
+            src="/assets/humotionlogin.png"
+            alt="Humotion"
+            className="block mx-auto h-auto max-h-[5svh] md:max-h-[5svh] lg:max-h-[50svh] w-auto object-contain"
+            onError={() => setLogoFailed(true)}
+          />
+        ) : (
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900">Humotion</h1>
+        )}
+        <p className="mt-3 md:mt-4 text-lg md:text-2xl text-gray-700">
+          {APP_DESCRIPTION}
         </p>
       </div>
 
       {/* Login card */}
-      <div id="accesso" className="flex justify-center px-4 pb-16 pt-10">
+      <div id="accesso" className="flex flex-col items-center gap-6 px-4 pb-16 pt-10">
         <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-gray-900">Accedi</h2>
@@ -108,7 +92,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, isLoading, au
                 value={formData.password}
                 onChange={handleInputChange('password')}
                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
-                placeholder="••••••••"
+                placeholder="********"
                 required
                 disabled={isLoading}
               />
@@ -127,6 +111,15 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, isLoading, au
             <p>Badge NFC disponibile per accesso rapido</p>
           </div>
         </div>
+
+        {/* Contact button navigates to dedicated page */}
+        <button
+          type="button"
+          onClick={onOpenContact}
+          className="inline-flex items-center rounded-full px-6 py-3 bg-gradient-to-r from-brand-cyan to-brand-blue text-white font-medium hover:opacity-90 transition-opacity"
+        >
+          Contattaci
+        </button>
       </div>
     </div>
   );

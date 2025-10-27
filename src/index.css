@@ -29,6 +29,25 @@ body {
   margin: 0 auto;
 }
 
+/* Brand variables and card style */
+:root {
+  --brand-blue: #007BFF;
+  --brand-blue-light: #66B2FF; /* approx lighter */
+  --brand-blue-dark: #0056B3;  /* approx darker */
+}
+
+.card-outset {
+  background: #ffffff;
+  border-style: solid;
+  border-width: 2px;
+  border-top-color: var(--brand-blue-light);
+  border-left-color: var(--brand-blue-light);
+  border-bottom-color: var(--brand-blue-dark);
+  border-right-color: var(--brand-blue-dark);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.08);
+}
+
 
 
 

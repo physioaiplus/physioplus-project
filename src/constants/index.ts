@@ -16,7 +16,8 @@ export const ROUTES = {
   PATIENT_DETAIL: '/patient/:id',
   EXERCISE: '/exercise/:visitId',
   HISTORY: '/history',
-  SETTINGS: '/settings'
+  SETTINGS: '/settings',
+  CONTACT: '/contact'
 } as const;
 
 // API Endpoints

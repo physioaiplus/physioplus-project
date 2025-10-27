@@ -21,7 +21,7 @@ export const NotificationsView: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-md shadow p-6">
+    <div className="card-outset p-6">
       {message && <div className="mb-3 bg-green-50 text-green-800 border border-green-200 px-3 py-2 rounded">{message}</div>}
       <label className="inline-flex items-center space-x-2">
         <input type="checkbox" checked={enabled} onChange={(e)=>setEnabled(e.target.checked)} />

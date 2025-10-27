@@ -25,7 +25,7 @@ export const History: React.FC<{ onBack?: () => void }>= ({ onBack }) => {
           <VisitsTable />
         )}
         {view === 'patients' && (
-          <div className="bg-white rounded-md shadow p-8 text-gray-700">Sezione in arrivo.</div>
+          <div className="card-outset p-8 text-gray-700">Sezione in arrivo.</div>
         )}
       </main>
     </div>

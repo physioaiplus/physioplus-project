@@ -48,7 +48,7 @@ export const PatientForm: React.FC<PatientFormProps> = ({
       <Header title="Nuovo Paziente" onBack={onCancel} />
 
       <main className="max-w-3xl mx-auto px-6 py-8">
-        <div className="bg-white rounded-md shadow-md p-8">
+        <div className="card-outset p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-2 gap-6">
               <div>

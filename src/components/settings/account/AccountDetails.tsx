@@ -42,7 +42,7 @@ export const AccountDetails: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-md shadow p-6">
+    <div className="card-outset p-6">
       {message && <div className="mb-3 bg-green-50 text-green-800 border border-green-200 px-3 py-2 rounded">{message}</div>}
       {error && <div className="mb-3 bg-red-50 text-red-800 border border-red-200 px-3 py-2 rounded">{error}</div>}
 

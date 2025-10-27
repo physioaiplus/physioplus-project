@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { LoginScreen } from './components/LoginScreen';
+import { ContactPage } from './components/ContactPage';
 import { Dashboard } from './components/Dashboard';
-import { PatientForm } from './components/PatientForm';
+import { NewPatientWizard } from './components/NewPatientWizard';
 import { PatientDetail } from './components/PatientDetail';
 import { Settings } from './components/settings/Settings';
 import { History as HistoryViewComp } from './components/history/History';
@@ -129,12 +130,18 @@ export default function App() {
   // View routing
   const renderCurrentView = () => {
     if (!isAuthenticated || !user) {
+      if (currentView === ViewType.CONTACT) {
+        return (
+          <ContactPage onBack={() => setCurrentView(ViewType.LOGIN)} />
+        );
+      }
       return (
         <LoginScreen 
           onLogin={handleLogin} 
           isLoading={authLoading}
           authError={authError}
           onClearError={() => setAuthError(null)}
+          onOpenContact={() => setCurrentView(ViewType.CONTACT)}
         />
       );
     }
@@ -172,7 +179,7 @@ export default function App() {
 
       case ViewType.NEW_PATIENT:
         return (
-          <PatientForm
+          <NewPatientWizard
             onSubmit={handleCreatePatient}
             onCancel={() => setCurrentView(ViewType.DASHBOARD)}
             isLoading={patientsLoading}

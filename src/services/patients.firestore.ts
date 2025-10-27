@@ -25,6 +25,7 @@ type FirestorePatient = {
     signed_at?: Timestamp;
     version?: string;
     accepted_terms?: boolean;
+    signature_png?: string; // base64 PNG (data URL)
   };
 };
 
@@ -84,7 +85,10 @@ export async function createPatientFs(form: NewPatientFormData): Promise<string>
       therapy_goal: form.obiettivo || ''
     },
     privacy_consent: {
-      accepted_terms: !!form.privacy_accepted
+      accepted_terms: !!form.privacy_accepted,
+      signed_at: serverTimestamp() as unknown as Timestamp,
+      version: 'v1.0',
+      signature_png: form.signature_data || ''
     }
   };
 

@@ -51,7 +51,7 @@ export const VisitsTable: React.FC = () => {
 
   return (
     <div>
-      <div className="bg-white rounded-md border p-4 mb-4 flex flex-col md:flex-row md:items-center md:space-x-4 space-y-3 md:space-y-0">
+      <div className="card-outset p-4 mb-4 flex flex-col md:flex-row md:items-center md:space-x-4 space-y-3 md:space-y-0">
         <input value={query} onChange={(e)=>setQuery(e.target.value)} placeholder="Cerca paziente" className="flex-1 border rounded px-3 py-2" />
         <select value={type} onChange={(e)=>setType(e.target.value)} className="border rounded px-3 py-2">
           <option value="all">Tutti i tipi</option>
@@ -62,7 +62,7 @@ export const VisitsTable: React.FC = () => {
         </select>
       </div>
 
-      <div className="bg-white rounded-md shadow p-0 overflow-x-auto">
+      <div className="card-outset p-0 overflow-x-auto">
         <table className="min-w-full text-sm">
           <thead>
             <tr className="text-left text-gray-600 border-b">

@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Activity } from 'lucide-react';
 import type { Patient, Visit } from '../types';
 import { Header } from './header/Header';
@@ -10,11 +10,12 @@ interface PatientDetailProps {
   onCreateVisit: (tipoAnalisi: string) => void;
 }
 
+// Tipi di analisi con caratteri corretti
 const ANALYSIS_TYPES = [
   {
     id: 'completa',
     title: 'Analisi Completa',
-    description: 'Postura + mobilitÃ  + peso + appoggi',
+    description: 'Postura + mobilità + peso + appoggi',
     icon: Activity
   },
   {
@@ -25,13 +26,13 @@ const ANALYSIS_TYPES = [
   },
   {
     id: 'mobilita_superiori',
-    title: 'MobilitÃ  Arti Superiori',
+    title: 'Mobilità Arti Superiori',
     description: 'Spalla, braccio - frontale e laterale',
     icon: Activity
   },
   {
     id: 'mobilita_inferiori',
-    title: 'MobilitÃ  Arti Inferiori',
+    title: 'Mobilità Arti Inferiori',
     description: 'Ginocchio, anca - frontale e laterale',
     icon: Activity
   }
@@ -69,7 +70,7 @@ export const PatientDetail: React.FC<PatientDetailProps> = ({
       />
 
       <main className="max-w-7xl mx-auto px-6 py-8">
-        <div className="bg-white rounded-md shadow-md p-8 mb-6">
+        <div className="card-outset p-8 mb-6">
           <h2 className="text-xl font-semibold mb-4">Informazioni Paziente</h2>
           <div className="grid grid-cols-2 gap-6">
             <div>
@@ -95,14 +96,14 @@ export const PatientDetail: React.FC<PatientDetailProps> = ({
           </div>
         </div>
 
-        <div className="bg-white rounded-md shadow-md p-8">
+        <div className="card-outset p-8">
           <h2 className="text-xl font-semibold mb-6">Nuova Analisi</h2>
           <div className="grid grid-cols-2 gap-4">
             {ANALYSIS_TYPES.map(({ id, title, description, icon: Icon }) => (
               <button
                 key={id}
                 onClick={() => onCreateVisit(id)}
-                className="p-6 border-2 border-gray-300 rounded-md hover:border-brand-blue hover:bg-brand-light\/20 transition-all text-left"
+                className="card-outset p-6 transition-all text-left hover:shadow-md hover:bg-brand-light/20"
               >
                 <Icon className="w-8 h-8 text-brand-blue mb-2" />
                 <h3 className="font-semibold text-lg mb-2">{title}</h3>
@@ -113,7 +114,7 @@ export const PatientDetail: React.FC<PatientDetailProps> = ({
         </div>
 
         {/* Visite recenti */}
-        <div className="bg-white rounded-md shadow-md p-8 mt-6">
+        <div className="card-outset p-8 mt-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold">Visite recenti</h2>
           </div>
@@ -148,8 +149,4 @@ export const PatientDetail: React.FC<PatientDetailProps> = ({
     </div>
   );
 };
-
-
-
-
 

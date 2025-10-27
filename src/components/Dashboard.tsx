@@ -71,7 +71,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
 
         {/* Barra ricerca + filtri */}
-        <div className="bg-white rounded-md shadow p-4 mb-6">
+        <div className="card-outset p-4 mb-6">
           <div className="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-3 md:space-y-0">
             <div className="relative flex-1">
               <Search className="w-4 h-4 absolute left-3 top-3 text-gray-400" />
@@ -108,7 +108,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <h3 className="text-sm font-semibold text-gray-700 mb-3">Pazienti recenti</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {recentPatients.map((p) => (
-                <div key={p.id} className="bg-white rounded-md border p-4 flex items-center justify-between hover:shadow cursor-pointer" onClick={() => onPatientSelect(p)}>
+                <div key={p.id} className="card-outset p-4 flex items-center justify-between hover:shadow-md cursor-pointer" onClick={() => onPatientSelect(p)}>
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-brand-light/20 rounded-full flex items-center justify-center text-brand-blue font-semibold">
                       {p.nome.charAt(0)}{p.cognome.charAt(0)}
