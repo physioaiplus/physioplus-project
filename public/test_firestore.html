@@ -40,15 +40,12 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, doc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Config from .env.staging
-        const firebaseConfig = {
-            apiKey: "REDACTED_GOOGLE_API_KEY",
-            authDomain: "physioai-staging.firebaseapp.com",
-            projectId: "physioai-staging",
-            storageBucket: "physioai-staging.firebasestorage.app",
-            messagingSenderId: "1019788781494",
-            appId: "1:1019788781494:web:08622689a9250960328317"
-        };
+        await import('/runtime-config.js');
+
+        const firebaseConfig = window.__APP_CONFIG__?.firebase;
+        if (!firebaseConfig?.apiKey) {
+            throw new Error('Missing Firebase runtime config. Configure /runtime-config.js before using this test page.');
+        }
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
