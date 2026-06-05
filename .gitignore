@@ -53,6 +53,13 @@ node_modules/
 # Optional eslint cache
 .eslintcache
 
+# Build output and local workspace artifacts
+dist/
+build_log.txt
+tmp_*.txt
+*.bak
+*.tmp
+
 # Optional REPL history
 .node_repl_history
 
@@ -64,3 +71,5 @@ node_modules/
 
 # dotenv environment variables file
 .env
+.env.local
+.env.*

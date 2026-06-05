@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "physioai-b5805"
-  }
+    "default": "physioai-b5805",
+    "staging": "physioai-staging"
+  },
+  "targets": {},
+  "etags": {}
 }

@@ -1,33 +1,13 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
+import { APP_RUNTIME_CONFIG } from './runtime';
 
-// Configurazione Firebase
-const firebaseConfig = {
-  apiKey: "REDACTED_GOOGLE_API_KEY",
-  authDomain: "physioai-b5805.firebaseapp.com",
-  projectId: "physioai-b5805",
-  storageBucket: "physioai-b5805.firebasestorage.app",
-  messagingSenderId: "570782811346",
-  appId: "1:570782811346:web:4b0ae730f69f83bf08590b"
-};
+const app = initializeApp(APP_RUNTIME_CONFIG.firebase);
 
-// Inizializza Firebase
-const app = initializeApp(firebaseConfig);
-
-// Inizializza Firebase Authentication
 export const auth = getAuth(app);
-
-// Inizializza Firestore
 export const db = getFirestore(app);
-
-// Connessione all'emulatore Firebase (solo per sviluppo)
-// Disabilita questa riga in produzione
-if (import.meta.env.DEV) {
-  // connectAuthEmulator(auth, "http://localhost:9099");
-}
+export const storage = getStorage(app);
 
 export default app;
-
-
-

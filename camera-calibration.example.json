@@ -1,0 +1,60 @@
+{
+  "profileId": "studio-rig-c920-v1",
+  "rigLabel": "Rig 3x Logitech C920",
+  "profileStatus": "calibrated",
+  "notes": "Esempio di profilo da salvare in localStorage con la chiave humotion.cameraCalibration.v1",
+  "views": [
+    {
+      "view": "front",
+      "deviceId": "front-camera-device-id",
+      "label": "Logitech C920 Front",
+      "rotationDeg": 0,
+      "isCalibrated": true,
+      "capturedAt": "2026-04-09T09:00:00Z",
+      "intrinsic": {
+        "fx": 1372.5,
+        "fy": 1368.1,
+        "cx": 960.0,
+        "cy": 540.0,
+        "widthPx": 1920,
+        "heightPx": 1080,
+        "distortionCoefficients": [
+          0.012,
+          -0.021,
+          0.0004,
+          -0.0007,
+          0.008
+        ],
+        "calibrationErrorPx": 0.34
+      },
+      "extrinsic": {
+        "rotationMatrix": [
+          [1.0, 0.0, 0.0],
+          [0.0, 1.0, 0.0],
+          [0.0, 0.0, 1.0]
+        ],
+        "translationVector": [0.0, 140.0, 260.0],
+        "rigPositionCm": {
+          "x": 0.0,
+          "y": 140.0,
+          "z": 260.0
+        },
+        "floorOffsetCm": 0.0
+      }
+    },
+    {
+      "view": "left",
+      "deviceId": "left-camera-device-id",
+      "label": "Logitech C920 Left",
+      "rotationDeg": 0,
+      "isCalibrated": true
+    },
+    {
+      "view": "right",
+      "deviceId": "right-camera-device-id",
+      "label": "Logitech C920 Right",
+      "rotationDeg": 0,
+      "isCalibrated": true
+    }
+  ]
+}

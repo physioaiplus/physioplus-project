@@ -3,19 +3,19 @@ import { CalendarClock, Users, ActivitySquare } from 'lucide-react';
 
 type HistoryView = 'index' | 'visits' | 'patients';
 
-export const HistoryIndex: React.FC<{ onOpen: (v: HistoryView) => void }>= ({ onOpen }) => {
+export const HistoryIndex: React.FC<{ onOpen: (v: HistoryView) => void }> = ({ onOpen }) => {
   const Item: React.FC<{ icon: React.ComponentType<{ className?: string }>; title: string; subtitle: string; onClick: () => void }>
     = ({ icon: Icon, title, subtitle, onClick }) => (
-    <button onClick={onClick} className="w-full flex items-center space-x-4 p-4 rounded card-outset hover:shadow-md">
-      <div className="w-10 h-10 rounded-lg bg-brand-light/20 flex items-center justify-center">
-        <Icon className="w-5 h-5 text-brand-blue" />
-      </div>
-      <div className="text-left">
-        <div className="text-gray-900 font-medium">{title}</div>
-        <div className="text-sm text-gray-600">{subtitle}</div>
-      </div>
-    </button>
-  );
+      <button onClick={onClick} className="w-full flex items-center space-x-4 p-4 rounded card-outset hover:shadow-md">
+        <div className="w-10 h-10 rounded-lg bg-brand-light/20 flex items-center justify-center">
+          <Icon className="w-5 h-5 text-brand-blue" />
+        </div>
+        <div className="text-left">
+          <div className="text-gray-900 font-medium">{title}</div>
+          <div className="text-sm text-gray-600">{subtitle}</div>
+        </div>
+      </button>
+    );
 
   const Group: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
     <div className="mb-6">
@@ -28,13 +28,13 @@ export const HistoryIndex: React.FC<{ onOpen: (v: HistoryView) => void }>= ({ on
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-4">History</h1>
+      <h1 className="text-2xl font-bold text-gray-900 mb-4">Archivio Completo</h1>
       <Group title="Attività">
         <Item icon={CalendarClock} title="Visite" subtitle="Storico visite effettuate" onClick={() => onOpen('visits')} />
         <Item icon={Users} title="Pazienti" subtitle="Pazienti creati/modificati" onClick={() => onOpen('patients')} />
       </Group>
       <Group title="Sistema">
-        <Item icon={ActivitySquare} title="Log applicazione" subtitle="Eventi principali dell'app" onClick={() => {}} />
+        <Item icon={ActivitySquare} title="Log applicazione" subtitle="Eventi principali dell'app" onClick={() => { }} />
       </Group>
     </div>
   );

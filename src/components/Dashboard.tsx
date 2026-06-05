@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react';
 import { Plus, Search } from 'lucide-react';
-import { PatientCard } from './PatientCard';
 import type { Patient, ViewType } from '../types';
 
 interface DashboardProps {
@@ -9,21 +8,6 @@ interface DashboardProps {
   onAddPatient: () => void;
   onPatientSelect: (patient: Patient) => void;
   onViewChange: (view: ViewType) => void;
-}
-
-function timeAgo(iso: string): string {
-  const d = new Date(iso);
-  const diff = Date.now() - d.getTime();
-  const minutes = Math.floor(diff / 60000);
-  if (minutes < 60) return `${minutes} min fa`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours} h fa`;
-  const days = Math.floor(hours / 24);
-  if (days < 30) return `${days} gg fa`;
-  const months = Math.floor(days / 30);
-  if (months < 12) return `${months} mesi fa`;
-  const years = Math.floor(months / 12);
-  return `${years} anni fa`;
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({
@@ -49,12 +33,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
       return genderOk && diagOk && searchOk;
     });
   }, [patients, query, gender, onlyDiagnosis]);
-
-  const recentPatients = useMemo(() => {
-    return [...patients]
-      .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
-      .slice(0, 5);
-  }, [patients]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -102,50 +80,65 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </div>
         </div>
 
-        {/* Sezione Recenti */}
-        {!isLoading && recentPatients.length > 0 && (
-          <div className="mb-8">
-            <h3 className="text-sm font-semibold text-gray-700 mb-3">Pazienti recenti</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {recentPatients.map((p) => (
-                <div key={p.id} className="card-outset p-4 flex items-center justify-between hover:shadow-md cursor-pointer" onClick={() => onPatientSelect(p)}>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-brand-light/20 rounded-full flex items-center justify-center text-brand-blue font-semibold">
-                      {p.nome.charAt(0)}{p.cognome.charAt(0)}
-                    </div>
-                    <div>
-                      <div className="font-medium text-gray-900">{p.nome} {p.cognome}</div>
-                      <div className="text-xs text-gray-500">Ultimo aggiornamento: {timeAgo(p.updated_at)}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
         {isLoading ? (
           <div className="flex justify-center items-center py-12">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-blue"></div>
             <span className="ml-2 text-gray-600">Caricamento pazienti...</span>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex flex-col gap-3">
             {filtered.map((patient) => (
-              <PatientCard
+              <div
                 key={patient.id}
-                patient={patient}
-                onClick={onPatientSelect}
-              />
+                onClick={() => onPatientSelect(patient)}
+                className="card-outset p-4 flex items-center justify-between hover:shadow-md cursor-pointer transition-all"
+              >
+                <div className="flex items-center gap-4 flex-1">
+                  <div className="w-12 h-12 bg-brand-light/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg font-semibold text-brand-blue">
+                      {patient.nome.charAt(0)}{patient.cognome.charAt(0)}
+                    </span>
+                  </div>
+                  <div className="flex flex-col min-w-[200px]">
+                    <h3 className="font-semibold text-gray-900">{patient.nome} {patient.cognome}</h3>
+                    <p className="text-sm text-gray-500">{patient.email}</p>
+                  </div>
+
+                  <div className="hidden md:flex items-center gap-6 text-sm text-gray-600 border-l border-gray-200 pl-6">
+                    <div>
+                      <span className="block text-xs text-gray-400">Altezza</span>
+                      <span className="font-medium">{patient.altezza} cm</span>
+                    </div>
+                    <div>
+                      <span className="block text-xs text-gray-400">Peso</span>
+                      <span className="font-medium">{patient.peso} kg</span>
+                    </div>
+                  </div>
+
+                  {patient.patologia && (
+                    <div className="hidden lg:block ml-auto mr-4">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                        {patient.patologia}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="text-gray-400">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
             ))}
+            {filtered.length === 0 && (
+              <div className="text-center py-12 text-gray-500">
+                Nessun paziente trovato
+              </div>
+            )}
           </div>
         )}
       </main>
     </div>
   );
 };
-
-
-
-
-

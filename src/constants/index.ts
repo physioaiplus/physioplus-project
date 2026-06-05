@@ -1,8 +1,6 @@
 /**
  * Costanti dell'applicazione
  */
-export const API_URL = 'http://localhost:8000';
-export const WS_URL = 'ws://localhost:8000';
 
 export const APP_NAME = 'Humotion';
 export const APP_DESCRIPTION = 'Sistema Rilevamento Posturale';
@@ -17,7 +15,8 @@ export const ROUTES = {
   EXERCISE: '/exercise/:visitId',
   HISTORY: '/history',
   SETTINGS: '/settings',
-  CONTACT: '/contact'
+  CONTACT: '/contact',
+  SCAN: '/scan'
 } as const;
 
 // API Endpoints
@@ -41,7 +40,11 @@ export const API_ENDPOINTS = {
     START: '/api/camera/start',
     STOP: '/api/camera/stop',
     STATUS: '/api/camera/status'
-  }
+  },
+  ANALYSIS: {
+    UPLOAD: '/api/analysis/pose/analyze'
+  },
+  STATUS: '/api/status'
 } as const;
 
 // WebSocket endpoints

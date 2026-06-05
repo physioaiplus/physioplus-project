@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, Settings, History, LogOut, Globe } from 'lucide-react';
+import { Users, Settings, History, LogOut, Calendar } from 'lucide-react';
 import { ViewType } from '../../types';
 
 interface NavHeaderProps {
@@ -11,8 +11,8 @@ interface NavHeaderProps {
 
 const NAV_ITEMS = [
   { id: ViewType.DASHBOARD, label: 'Pazienti', icon: Users },
-  { id: ViewType.HISTORY, label: 'Storico', icon: History },
-  { id: ViewType.SETTINGS, label: 'Impostazioni', icon: Settings }
+  { id: ViewType.HISTORY, label: 'Visite', icon: History },
+  { id: ViewType.CALENDAR, label: 'Calendario', icon: Calendar }
 ] as const;
 
 export const NavHeader: React.FC<NavHeaderProps> = ({
@@ -39,11 +39,10 @@ export const NavHeader: React.FC<NavHeaderProps> = ({
                   <button
                     key={id}
                     onClick={() => onViewChange(id)}
-                    className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${
-                      currentView === id
-                        ? 'text-brand-blue'
-                        : 'hover:text-gray-900'
-                    }`}
+                    className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${currentView === id
+                      ? 'text-brand-blue'
+                      : 'hover:text-gray-900'
+                      }`}
                   >
                     <Icon className="w-4 h-4" />
                     <span>{label}</span>
@@ -53,7 +52,6 @@ export const NavHeader: React.FC<NavHeaderProps> = ({
 
               {/* Right actions */}
               <div className="flex items-center gap-3 relative">
-                <Globe className="w-5 h-5 text-gray-600" />
                 <button
                   onClick={() => setMenuOpen((v) => !v)}
                   onBlur={() => setTimeout(() => setMenuOpen(false), 100)}
@@ -67,6 +65,18 @@ export const NavHeader: React.FC<NavHeaderProps> = ({
 
                 {menuOpen && (
                   <div className="absolute right-0 top-12 w-48 bg-white border border-gray-200 rounded-xl shadow-lg py-1 z-20">
+                    <button
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => {
+                        onViewChange(ViewType.SETTINGS);
+                        setMenuOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      <Settings className="w-4 h-4" />
+                      Impostazioni
+                    </button>
+                    <div className="h-px bg-gray-100 my-1" />
                     <button
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={onLogout}

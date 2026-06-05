@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
-import { API_URL } from '../constants';
 import type { Visit, AnalysisType } from '../types';
-import { createVisitFs, getVisitByIdFs, listRecentVisitsByPatient } from '../services/visits.firestore';
+import { apiService } from '../services/api';
 
 export const useVisits = () => {
   const [currentVisit, setCurrentVisit] = useState<Visit | null>(null);
@@ -17,22 +16,34 @@ export const useVisits = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const id = await createVisitFs(patientId, operatorId, tipoAnalisi, note);
-      const visit: Visit = {
-        id,
-        patient_id: patientId,
-        operator_id: operatorId,
-        tipo_analisi: tipoAnalisi,
-        status: 'in_progress',
-        created_at: new Date().toISOString(),
-        exercises: []
-      };
-      setCurrentVisit(visit);
-      return id;
+      const response = await apiService.createVisit(patientId, operatorId, tipoAnalisi, note);
+      let id: string | null = null;
+      if (response && response.success) {
+        // Handle different possible response structures
+        const data: any = response.data;
+        if (data && data.visit_id) id = data.visit_id;
+        else if (data && data.id) id = data.id;
+        else if (typeof data === 'string') id = data;
+      }
+
+      if (id) {
+        const visit: Visit = {
+          id,
+          patient_id: patientId,
+          operator_id: operatorId,
+          tipo_analisi: tipoAnalisi,
+          status: 'in_progress',
+          created_at: new Date().toISOString(),
+          exercises: []
+        };
+        setCurrentVisit(visit);
+        return id;
+      }
+      return null;
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Errore sconosciuto';
       setError(errorMessage);
-      console.error('Errore creazione visita (Firestore):', error);
+      console.error('Errore creazione visita (API):', error);
       return null;
     } finally {
       setIsLoading(false);
@@ -43,13 +54,18 @@ export const useVisits = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const visit = await getVisitByIdFs(visitId);
-      if (visit) setCurrentVisit(visit);
-      return visit;
+      const response = await apiService.getVisit(visitId);
+      if (response.success && response.data) {
+        // Assume apiService.getVisit returns generic object, cast to Visit
+        const visit = response.data as unknown as Visit;
+        setCurrentVisit(visit);
+        return visit;
+      }
+      return null;
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Errore sconosciuto';
       setError(errorMessage);
-      console.error('Errore recupero visita (Firestore):', error);
+      console.error('Errore recupero visita (API):', error);
       return null;
     } finally {
       setIsLoading(false);
@@ -62,20 +78,10 @@ export const useVisits = () => {
   ): Promise<boolean> => {
     setIsLoading(true);
     setError(null);
-    
+
     try {
-      const response = await fetch(`${API_URL}/api/visits/${visitId}/exercises`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(exercises)
-      });
-      
-      const data = await response.json();
-      
+      const data = await apiService.updateVisitExercises(visitId, exercises);
       if (data.success) {
-        // Aggiorna visita locale se è la stessa
         if (currentVisit && currentVisit.id === visitId) {
           setCurrentVisit({
             ...currentVisit,
@@ -98,6 +104,19 @@ export const useVisits = () => {
 
   const clearCurrentVisit = useCallback(() => {
     setCurrentVisit(null);
+  }, []);
+
+  const listRecentVisitsByPatient = useCallback(async (patientId: string): Promise<Visit[]> => {
+    try {
+      const res = await apiService.getPatientVisits(patientId);
+      if (res.success && Array.isArray(res.data)) {
+        return res.data as Visit[];
+      }
+      return [];
+    } catch (e) {
+      console.error("Failed to list patient visits", e);
+      return [];
+    }
   }, []);
 
   return {

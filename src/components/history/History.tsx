@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Header } from '../header/Header';
 import { HistoryIndex } from './HistoryIndex';
 import { VisitsTable } from './VisitsTable';
+import { PatientVisitsHistory } from './PatientVisitsHistory';
 
 type HistoryView = 'index' | 'visits' | 'patients';
 
-export const History: React.FC<{ onBack?: () => void }>= ({ onBack }) => {
+export const History: React.FC<{ onBack?: () => void }> = ({ onBack }) => {
   const [view, setView] = useState<HistoryView>('index');
 
   const title = view === 'index' ? 'Storico' : (view === 'visits' ? 'Visite' : 'Pazienti');
@@ -25,7 +26,7 @@ export const History: React.FC<{ onBack?: () => void }>= ({ onBack }) => {
           <VisitsTable />
         )}
         {view === 'patients' && (
-          <div className="card-outset p-8 text-gray-700">Sezione in arrivo.</div>
+          <PatientVisitsHistory />
         )}
       </main>
     </div>

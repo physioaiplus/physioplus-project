@@ -1,48 +1,28 @@
-# PhysioAI - Sistema Rilevamento Posturale
+# physioplus-project
 
-## 🚀 INSTALLAZIONE SEMPLICISSIMA
+Frontend React/Vite di Humotion / PhysioPlus.
 
-### ⭐ UN SOLO FILE PER TUTTO
+## Stack attivo
 
-**DOUBLE-CLICK** su: **`PhysioAI.bat`**
+- React 18 + TypeScript
+- Vite
+- Tailwind CSS
+- Firebase Web SDK
+- React Three Fiber / Three.js
 
-**FATTO!** Non servono altri passaggi.
+## Percorsi principali
 
----
+- `src/`: codice applicativo attivo
+- `public/`: asset statici e runtime config pubblica
+- `scripts/write-runtime-config.ps1`: scrittura runtime config per staging/production
 
-## 🎯 COSA FA PhysioAI.bat
+## Deploy
 
-1. **Verifica** Python e Node.js installati
-2. **Setup** ambiente Python automatizado  
-3. **Installa** tutte le dipendenze backend (FastAPI, OpenCV, MediaPipe)
-4. **Setup** ambiente Node.js automatizado
-5. **Installa** tutte le dipendenze frontend (React, TypeScript)
-6. **Avvia** Backend Server (porta 8000)
-7. **Avvia** Frontend Server (porta 3000)  
-8. **Apre** automaticamente il browser
+- `deploy_frontend_staging.bat`: build + runtime config + deploy Hosting su staging
+- `deploy_frontend_prod.bat`: build + runtime config + deploy Hosting su production
 
-## 🌐 RISULTATO
+## Note repository
 
-- 📱 **Frontend**: http://localhost:3000 (interfaccia)
-- 🔧 **Backend**: http://localhost:8000 (API server)
-- 📖 **Docs**: http://localhost:8000/docs (documentazione)
-
-### 🔑 Accesso Demo
-- **Email**: demo@physioai.com
-- **Password**: password123
-
-## ⚠️ IMPORTANTE
-
-- ✅ **Mantieni aperte** le finestre dei server
-- ✅ La app funziona solo fino a quando sono attive
-- ✅ Per fermare: Ctrl+C in ogni finestra
-- ✅ Per riavviare: esegui di nuovo PhysioAI.bat
-
-## 📋 Prerequisiti
-
-- **Python 3.9+**: https://www.python.org/downloads/
-- **Node.js 18+**: https://nodejs.org/
-
----
-
-**TL;DR**: Double-click su `PhysioAI.bat` = App completamente funzionante! 🎉
+- `dist/` e i file temporanei locali non fanno parte del sorgente applicativo.
+- I backup locali come `*.bak` e i dump temporanei sono esclusi dal repository.
+- Il frontend usa come path canonico i client API in `src/services/api.ts`; i moduli Firestore diretti legacy per patients/visits non sono piu il percorso standard.

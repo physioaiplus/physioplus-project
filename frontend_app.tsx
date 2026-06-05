@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Camera, Users, Activity, Settings, History, LogOut, Plus, Eye, Play, Square, AlertCircle, Check } from 'lucide-react';
+import { API_BASE_URL, WS_BASE_URL, buildApiUrl } from './src/config/api';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = API_BASE_URL;
 
 export default function PostureAnalysisApp() {
   const [currentView, setCurrentView] = useState('login');
@@ -106,10 +107,10 @@ export default function PostureAnalysisApp() {
   const startStreaming = async () => {
     try {
       // Avvia camera backend
-      await fetch(`${API_URL}/api/camera/start`, { method: 'POST' });
+      await fetch(buildApiUrl('/camera_start'), { method: 'POST' });
       
       // Connetti WebSocket
-      const websocket = new WebSocket(`ws://localhost:8000/ws/pose-stream/${currentVisit.id}`);
+      const websocket = new WebSocket(`${WS_BASE_URL}/ws/pose-stream/${currentVisit.id}`);
       
       websocket.onopen = () => {
         console.log('WebSocket connesso');
@@ -142,7 +143,7 @@ export default function PostureAnalysisApp() {
       ws.close();
       setWs(null);
     }
-    await fetch(`${API_URL}/api/camera/stop`, { method: 'POST' });
+    await fetch(buildApiUrl('/camera_stop'), { method: 'POST' });
     setIsStreaming(false);
     setStreamData(null);
   };

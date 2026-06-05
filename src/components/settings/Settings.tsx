@@ -5,8 +5,9 @@ import { AccountDetails } from './account/AccountDetails';
 import { ChangePassword } from './account/ChangePassword';
 import { NotificationsView } from './preferences/NotificationsView';
 import { LanguageView } from './preferences/LanguageView';
+import { CameraStudioView } from './studio/CameraStudioView';
 
-type SettingsView = 'index' | 'account' | 'password' | 'notifications' | 'language' | 'privacy' | 'policy' | 'help' | 'contact' | 'about' | 'updates';
+type SettingsView = 'index' | 'account' | 'password' | 'notifications' | 'language' | 'cameras' | 'privacy' | 'policy' | 'help' | 'contact' | 'about' | 'updates';
 
 export const Settings: React.FC<{ onBack?: () => void }>= ({ onBack }) => {
   const [view, setView] = useState<SettingsView>('index');
@@ -17,6 +18,7 @@ export const Settings: React.FC<{ onBack?: () => void }>= ({ onBack }) => {
       case 'password': return 'Change Password';
       case 'notifications': return 'Notifications';
       case 'language': return 'Language';
+      case 'cameras': return 'Studio e camere';
       default: return 'Impostazioni';
     }
   })();
@@ -44,6 +46,9 @@ export const Settings: React.FC<{ onBack?: () => void }>= ({ onBack }) => {
         )}
         {view === 'language' && (
           <LanguageView />
+        )}
+        {view === 'cameras' && (
+          <CameraStudioView />
         )}
         {['privacy','policy','help','contact','about','updates'].includes(view) && (
           <div className="card-outset p-8 text-gray-700">

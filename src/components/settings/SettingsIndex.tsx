@@ -1,7 +1,7 @@
 import React from 'react';
-import { User, Lock, Bell, Globe, Shield, FileText, HelpCircle, Mail, Info, RefreshCcw } from 'lucide-react';
+import { User, Lock, Bell, Globe, Shield, FileText, HelpCircle, Mail, Info, RefreshCcw, Video } from 'lucide-react';
 
-type SettingsView = 'index' | 'account' | 'password' | 'notifications' | 'language' | 'privacy' | 'policy' | 'help' | 'contact' | 'about' | 'updates';
+type SettingsView = 'index' | 'account' | 'password' | 'notifications' | 'language' | 'cameras' | 'privacy' | 'policy' | 'help' | 'contact' | 'about' | 'updates';
 
 interface SettingsIndexProps {
   onOpen: (view: SettingsView) => void;
@@ -40,6 +40,7 @@ export const SettingsIndex: React.FC<SettingsIndexProps> = ({ onOpen }) => {
       <Group title="Preferences">
         <Item icon={Bell} title="Notifications" subtitle="Manage your notification settings" onClick={() => onOpen('notifications')} />
         <Item icon={Globe} title="Language" subtitle="Choose your preferred language" onClick={() => onOpen('language')} />
+        <Item icon={Video} title="Studio e camere" subtitle="Configura device, rotazioni e posizione delle telecamere" onClick={() => onOpen('cameras')} />
       </Group>
 
       <Group title="Privacy">

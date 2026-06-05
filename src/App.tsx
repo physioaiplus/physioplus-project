@@ -6,54 +6,54 @@ import { NewPatientWizard } from './components/NewPatientWizard';
 import { PatientDetail } from './components/PatientDetail';
 import { Settings } from './components/settings/Settings';
 import { History as HistoryViewComp } from './components/history/History';
-import { ExerciseView } from './components/ExerciseView';
+import { ScanPage } from './components/ScanPage';
 import { NavHeader } from './components/header/NavHeader';
+import { AdminDashboard } from './components/AdminDashboard';
+import { CalendarPage } from './components/CalendarPage';
+
+// ... (imports)
+
+// ...
 
 import { useAuth } from './hooks/useAuth';
 import { usePatients } from './hooks/usePatients';
 import { useVisits } from './hooks/useVisits';
 import { useCamera } from './hooks/useCamera';
-import { useWebSocket } from './hooks/useWebSocket';
+import { useHeartbeat } from './hooks/useHeartbeat';
 
 import { ViewType } from './types';
 import type { Patient, NewPatientFormData, AnalysisType } from './types';
 
 export default function App() {
   // Hooks
-  const { 
-    user, 
-    isLoading: authLoading, 
-    isAuthenticated, 
+  const {
+    user,
+    isLoading: authLoading,
+    isAuthenticated,
     authError,
-    login, 
-    logout, 
-    setAuthError 
+    login,
+    logout,
+    setAuthError
   } = useAuth();
-  
-  const { 
-    patients, 
-    isLoading: patientsLoading, 
-    loadPatients, 
-    createPatient 
+
+  const {
+    patients,
+    isLoading: patientsLoading,
+    loadPatients,
+    createPatient
   } = usePatients();
-  
-  const { 
-    currentVisit, 
-    createVisit 
+
+  const {
+    currentVisit,
+    createVisit
   } = useVisits();
-  
-  const { 
-    isStreaming, 
-    startCamera, 
-    stopCamera 
+
+  // Add heartbeat for activity tracking
+  useHeartbeat();
+
+  const {
+    stopCamera
   } = useCamera();
-  
-  const { 
-    streamData, 
-    isConnected, 
-    connect, 
-    disconnect 
-  } = useWebSocket();
 
   // State
   const [currentView, setCurrentView] = React.useState<ViewType>(ViewType.DASHBOARD);
@@ -80,29 +80,20 @@ export default function App() {
 
   const handleCreateVisit = async (tipoAnalisi: string) => {
     if (!selectedPatient || !user) return;
-    
+
     const visitId = await createVisit(
       selectedPatient.id,
       user.uid,
       tipoAnalisi as AnalysisType
     );
-    
+
     if (visitId) {
       setCurrentView(ViewType.EXERCISE);
     }
   };
 
-  const handleStartStreaming = async () => {
-    if (!currentVisit) return;
-    
-    const cameraStarted = await startCamera();
-    if (cameraStarted) {
-      connect(currentVisit.id);
-    }
-  };
-
   const handleStopStreaming = async () => {
-    disconnect();
+    // disconnect();
     await stopCamera();
   };
 
@@ -136,14 +127,19 @@ export default function App() {
         );
       }
       return (
-        <LoginScreen 
-          onLogin={handleLogin} 
+        <LoginScreen
+          onLogin={handleLogin}
           isLoading={authLoading}
           authError={authError}
           onClearError={() => setAuthError(null)}
           onOpenContact={() => setCurrentView(ViewType.CONTACT)}
         />
       );
+    }
+
+    // If user is admin, show Admin Dashboard exclusively
+    if (user.isAdmin) {
+      return <AdminDashboard onLogout={logout} userEmail={user.email} />;
     }
 
     // Header per tutte le views tranne exercise
@@ -210,15 +206,10 @@ export default function App() {
           return null;
         }
         return (
-          <ExerciseView
+          <ScanPage
             patient={selectedPatient}
             visit={currentVisit}
-            streamData={streamData}
-            isStreaming={isStreaming}
-            isConnecting={!isConnected && isStreaming}
-            onStartStreaming={handleStartStreaming}
-            onStopStreaming={handleStopStreaming}
-            onClose={handleCloseExercise}
+            onBack={handleCloseExercise}
           />
         );
 
@@ -227,12 +218,19 @@ export default function App() {
           <HistoryViewComp onBack={() => setCurrentView(ViewType.DASHBOARD)} />
         );
 
+      case ViewType.CALENDAR:
+        return (
+          <CalendarPage />
+        );
+
+
+
       default:
         return (
           <Dashboard
             patients={patients}
             isLoading={patientsLoading}
-            onAddPatient={() => setCurrentView(ViewType.NEW_PATIENT )}
+            onAddPatient={() => setCurrentView(ViewType.NEW_PATIENT)}
             onPatientSelect={handlePatientSelect}
             onViewChange={handleViewChange}
           />

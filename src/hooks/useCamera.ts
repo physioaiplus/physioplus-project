@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { API_URL } from '../constants';
+import { apiService } from '../services/api';
 
 export const useCamera = () => {
   const [isStreaming, setIsStreaming] = useState(false);
@@ -11,12 +11,7 @@ export const useCamera = () => {
     setError(null);
     
     try {
-      const response = await fetch(`${API_URL}/api/camera/start`, {
-        method: 'POST'
-      });
-      
-      const data = await response.json();
-      
+      const data = await apiService.startCamera();
       if (data.success) {
         setIsStreaming(true);
         return true;
@@ -38,12 +33,7 @@ export const useCamera = () => {
     setError(null);
     
     try {
-      const response = await fetch(`${API_URL}/api/camera/stop`, {
-        method: 'POST'
-      });
-      
-      const data = await response.json();
-      
+      const data = await apiService.stopCamera();
       if (data.success) {
         setIsStreaming(false);
         return true;
@@ -65,11 +55,9 @@ export const useCamera = () => {
     setError(null);
     
     try {
-      const response = await fetch(`${API_URL}/api/camera/status`);
-      const data = await response.json();
-      
+      const data = await apiService.getCameraStatus();
       if (data.success) {
-        return data.status;
+        return data.data;
       } else {
         throw new Error(data.message || 'Errore nel recupero dello stato della camera');
       }
